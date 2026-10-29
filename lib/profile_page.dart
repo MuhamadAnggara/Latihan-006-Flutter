@@ -25,38 +25,68 @@ class ProfilePage extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: 24.0, horizontal: 16.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const CircleAvatar(
-                  radius: 50,
-                   backgroundColor: Color(0xFF6750A4),
-                  child: Icon(
-                    Icons.person,
-                    size: 60,
-                    color: Colors.white,
-                  ),
-                ),
-                const SizedBox(height: 16),
-
-                const Text(
-                  'Muhamad Anggara',
-                  style: TextStyle(fontSize: 20,
-                  fontWeight: FontWeight.bold),
-                  textAlign: TextAlign.center,
-                ),
-                 const SizedBox(height: 6),
-                Text(
-                  'Latihan Flutter Engineer',
-                  style: TextStyle(
-                    fontSize: 14,
-                    color: Colors.grey[600],
-                  ),
-                  textAlign: TextAlign.center,
+            children: [
+                ProfileAvatar(),
+                SizedBox(height: 16),
+                ProfileInfo(
+                  name: 'Muhamad Anggara',
+                  role: 'Latihan Flutter Engineer',
                 ),
               ],
             ),
           ),
         ),
       ),
+    );
+  }
+}
+
+class ProfileAvatar extends StatelessWidget {
+  const ProfileAvatar({super.key});
+  @override
+  Widget build(BuildContext context) {
+    return const CircleAvatar(
+      radius: 50,
+      backgroundColor: Color(0xFF6750A4),
+      child: Icon(
+        Icons.person,
+        size: 60,
+        color: Colors.white,
+      ),
+    );
+  }
+}
+
+class ProfileInfo extends StatelessWidget {
+  final String name;
+  final String role;
+  const ProfileInfo({
+    super.key,
+    required this.name,
+    required this.role,
+  });
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Text(
+          name,
+          style: const TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+          ),
+          textAlign: TextAlign.center,
+        ),
+        const SizedBox(height: 6),
+        Text(
+          role,
+          style: TextStyle(
+            fontSize: 14,
+            color: Colors.grey[600],
+          ),
+          textAlign: TextAlign.center,
+        ),
+      ],
     );
   }
 }
