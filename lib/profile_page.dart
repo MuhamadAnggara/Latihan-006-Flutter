@@ -4,10 +4,10 @@ class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
 
   final List<String> experiences = const [
-    'Senior Backend Engineer - EDC Bank BRI',
-    'Backend & System Architect - Secure Payment EDC',
-    'Lead Developer - Apticom Solusindo',
-    'Pembuatan Framework - Pengembangan Sistem E-Commerce',
+    'Pengembang Backend Senior - EDC Bank BRI',
+    'Arsitek Sistem & Backend - Pembayaran Digital EDC',
+    'Ketua Tim Pengembang - Apticom Solusindo',
+    'Pembuat Framework - Pengembangan Sistem E-Commerce',
   ];
 
   @override
@@ -74,9 +74,8 @@ class ProfilePage extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               itemCount: experiences.length,
               itemBuilder: (context, index) {
-                return ListTile(
-                  leading: const Icon(Icons.work, color: Colors.blue),
-                  title: Text(experiences[index]),
+                return ExperienceCard(
+                  title: experiences[index],
                 );
               },
             ),
@@ -194,6 +193,56 @@ class StatItem extends StatelessWidget {
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class ExperienceCard extends StatelessWidget {
+  final String title;
+
+  const ExperienceCard({
+    super.key,
+    required this.title,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      elevation: 2,
+      margin: const EdgeInsets.symmetric(vertical: 6.0),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 16.0),
+        child: Row(
+          children: [
+            Container(
+              padding: const EdgeInsets.all(8.0),
+              decoration: BoxDecoration(
+                color: const Color(0xFFEAF2FD),
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: const Icon(
+                Icons.work_outline,
+                color: Colors.blue,
+                size: 20,
+              ),
+            ),
+            const SizedBox(width: 14),
+            Expanded(
+              child: Text(
+                title,
+                style: const TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w500,
+                  color: Colors.black87,
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
