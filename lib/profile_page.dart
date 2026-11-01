@@ -26,18 +26,14 @@ class ProfilePage extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                // 1. Avatar
                 const ProfileAvatar(),
                 const SizedBox(height: 16),
-
-                // 2. Info Nama & Role
                 const ProfileInfo(
                   name: 'Muhamad Anggara',
                   role: 'Latihan Flutter Engineer',
                 ),
                 const SizedBox(height: 12),
 
-                // 3. Tombol Edit Profil
                 OutlinedButton.icon(
                   onPressed: () {},
                   icon: const Icon(Icons.edit, size: 16),
@@ -51,88 +47,7 @@ class ProfilePage extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 20),
-
-                // 4. Baris Statistik (Row + Expanded + Column)
-                Container(
-                  padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 8.0),
-                  decoration: BoxDecoration(
-                    color: const Color(0xFFEAF2FD),
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  child: const Row(
-                    children: [
-                      // Kolom 1: Proyek
-                      Expanded(
-                        child: Column(
-                          children: [
-                            Text(
-                              '15',
-                              style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.blue,
-                              ),
-                            ),
-                            SizedBox(height: 4),
-                            Text(
-                              'Proyek',
-                              style: TextStyle(
-                                fontSize: 13,
-                                color: Colors.grey,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      // Kolom 2: Followers
-                      Expanded(
-                        child: Column(
-                          children: [
-                            Text(
-                              '1.2K',
-                              style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.blue,
-                              ),
-                            ),
-                            SizedBox(height: 4),
-                            Text(
-                              'Followers',
-                              style: TextStyle(
-                                fontSize: 13,
-                                color: Colors.grey,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      // Kolom 3: Following
-                      Expanded(
-                        child: Column(
-                          children: [
-                            Text(
-                              '42',
-                              style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.blue,
-                              ),
-                            ),
-                            SizedBox(height: 4),
-                            Text(
-                              'Following',
-                              style: TextStyle(
-                                fontSize: 13,
-                                color: Colors.grey,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+                const ProfileStats(),
               ],
             ),
           ),
@@ -142,9 +57,6 @@ class ProfilePage extends StatelessWidget {
   }
 }
 
-// ==========================================
-// CUSTOM WIDGET 1: ProfileAvatar
-// ==========================================
 class ProfileAvatar extends StatelessWidget {
   const ProfileAvatar({super.key});
 
@@ -162,9 +74,6 @@ class ProfileAvatar extends StatelessWidget {
   }
 }
 
-// ==========================================
-// CUSTOM WIDGET 2: ProfileInfo (Passing Data)
-// ==========================================
 class ProfileInfo extends StatelessWidget {
   final String name;
   final String role;
@@ -197,6 +106,65 @@ class ProfileInfo extends StatelessWidget {
           textAlign: TextAlign.center,
         ),
       ],
+    );
+  }
+}
+
+class ProfileStats extends StatelessWidget {
+  const ProfileStats({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 8.0),
+      decoration: BoxDecoration(
+        color: const Color(0xFFEAF2FD),
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: const Row(
+        children: [
+          StatItem(count: '15', label: 'Proyek'),
+          StatItem(count: '1.2K', label: 'Followers'),
+          StatItem(count: '42', label: 'Following'),
+        ],
+      ),
+    );
+  }
+}
+
+class StatItem extends StatelessWidget {
+  final String count;
+  final String label;
+
+  const StatItem({
+    super.key,
+    required this.count,
+    required this.label,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: Column(
+        children: [
+          Text(
+            count,
+            style: const TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+              color: Colors.blue,
+            ),
+          ),
+          const SizedBox(height: 4),
+          Text(
+            label,
+            style: const TextStyle(
+              fontSize: 13,
+              color: Colors.grey,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
