@@ -17,6 +17,46 @@ class _ProfilePageState extends State<ProfilePage> {
     'Pembuat Framework - Pengembangan Sistem E-Commerce',
   ];
 
+  void _showEditProfileDialog() {
+    final TextEditingController nameController =
+        TextEditingController(text: userName);
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Edit Profil'),
+          content: TextFormField(
+            controller: nameController,
+            decoration: const InputDecoration(
+              labelText: 'Nama Lengkap',
+              border: OutlineInputBorder(),
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: const Text('Batal'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                if (nameController.text.trim().isNotEmpty) {
+                  setState(() {
+                    userName = nameController.text.trim();
+                  });
+                }
+                Navigator.of(context).pop();
+              },
+              child: const Text('Simpan'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,7 +87,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
                 const SizedBox(height: 12),
                 OutlinedButton.icon(
-                  onPressed: () {},
+                  onPressed: _showEditProfileDialog,
                   icon: const Icon(Icons.edit, size: 16),
                   label: const Text('Edit Profil'),
                   style: OutlinedButton.styleFrom(
